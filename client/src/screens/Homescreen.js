@@ -4,8 +4,8 @@ import Room from '../components/Rooms';
 function Homescreen() {
 
     const [rooms, setrooms] = useState([]);
-    const [loading, setLoading] = useState();
     const [error, setError] = useState();
+    const [loading, setLoading] = useState();
 
     useEffect(() => {
 

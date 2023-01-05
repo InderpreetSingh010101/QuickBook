@@ -1,7 +1,7 @@
-function Error() {
+function Error({message}) {
     return (
         <div class="alert alert-danger mt-5 " role="alert">
-             Something Went Wrong Pls Try Again 
+             {message} 
         </div>
     )
 }

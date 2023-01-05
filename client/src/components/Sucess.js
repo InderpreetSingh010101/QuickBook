@@ -1,7 +1,7 @@
-function Sucess() {
+function Sucess({message}) {
     return (
         <div class="alert alert-success" role="alert">
-             Success 
+             {message}
         </div>
     )
 }

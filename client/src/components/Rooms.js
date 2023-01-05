@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import React, { useState } from 'react';
 import{Link} from 'react-router-dom' ;
 import Carousel from 'react-bootstrap/Carousel';
-function Room({ room }) {
+function Room({ room , fromDate , toDate }) {
 
   const [show, setShow] = useState(false);
 
@@ -25,7 +25,7 @@ function Room({ room }) {
         </b>
          
          <div style={{float: "right"}}>
-         <Link to={`/book/${room._id}`}>
+         <Link to={`/book/${room._id}/${fromDate}/${toDate}`}>
           {/* <Link to={`/register`}> */}
           <button className="btn btn-primary m-2">Book Now</button>
           

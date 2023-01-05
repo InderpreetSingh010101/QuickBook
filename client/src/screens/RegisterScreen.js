@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-
+import axios from 'axios' ;
+import Loader from "../components/Loader";
+import Error from "../components/Error";
+import Sucess from '../components/Sucess';
 function RegisterScreen() {
 
     const [name, setname] = useState('');
@@ -7,14 +10,35 @@ function RegisterScreen() {
     const [password, setpassword] = useState('');
     const [confirmpassword, setconfirmpassword] = useState('');
 
-     function registerChk(){
+    const [loading, setloading] = useState(false );
+    const [error, seterror] = useState(false );
+    const [sucess, setsucess] = useState(false );
+    
+
+     async function registerChk(){
         if(password == confirmpassword){
             const user = {
                 name,
                 email,
                 password
             }
-            console.log(user) ;
+            try{
+                setloading(true) ;
+              const result = await (await axios.post('/api/users/register' , user)).data ;
+              setloading(false) ;
+              setsucess(true) ;
+
+              setname('') ;
+              setemail('');
+              setpassword("");
+              setconfirmpassword("") ;
+              
+
+            }catch(error){
+             console.log(error) ;
+             setloading(false) ;
+             seterror(true) ;
+            }
         }else{
             alert("Password Mismatched") ;
         }
@@ -22,8 +46,12 @@ function RegisterScreen() {
 
 
     return (
+        <>
+        {loading && (<Loader/>)}
+        {error &&(<Error/>)}
         <div className="row justify-content-center mt-5" >
             <div className="col-md-5">
+              {sucess &&(<Sucess message='Registration Sucess'/>)}
 
                 <div className='bs'>
                     <b><h1> RegisterScreen</h1></b>
@@ -37,6 +65,7 @@ function RegisterScreen() {
             </div>
 
         </div>
+        </>
     )
 }
 export default RegisterScreen;

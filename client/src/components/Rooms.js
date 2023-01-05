@@ -9,6 +9,7 @@ function Room({ room , fromDate , toDate }) {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const user = JSON.parse(localStorage.getItem('currentUser'));
 
   return (
     <div className="row bs">
@@ -25,11 +26,30 @@ function Room({ room , fromDate , toDate }) {
         </b>
          
          <div style={{float: "right"}}>
-         <Link to={`/book/${room._id}/${fromDate}/${toDate}`}>
+         
+         {(fromDate && toDate)&&(
+          <>
+            {user ?(<>
+          <Link to={`/book/${room._id}/${fromDate}/${toDate}`}>
           {/* <Link to={`/register`}> */}
           <button className="btn btn-primary m-2">Book Now</button>
           
           </Link>
+         </>) :(<>
+          <Link to={`/login`}>
+          {/* <Link to={`/register`}> */}
+          <button className="btn btn-primary m-2">Book Now</button>
+          
+          </Link>
+         </>)}
+            </>
+         )
+
+         }
+         
+
+
+
            <button className="btn btn-primary"onClick={handleShow}>View Details</button>
          </div>
           

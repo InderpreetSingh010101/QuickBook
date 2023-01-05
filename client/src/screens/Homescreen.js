@@ -14,6 +14,7 @@ function Homescreen() {
     const [loading, setLoading] = useState();
     const [fromDate, setfromDate] = useState();
     const [toDate, settoDate] = useState();
+    const [duplicate, setduplicate] = useState([]);
 
     useEffect(() => {
 
@@ -22,8 +23,9 @@ function Homescreen() {
                 setLoading(true);
                 const data = (await axios.get(`/api/rooms/getallrooms`)).data
                 setLoading(false);
-
+                
                 setrooms(data);
+                setduplicate(data) ;
             } catch (error) {
                 setError(true);
                 console.log(error);
@@ -35,12 +37,53 @@ function Homescreen() {
     }, []);
 
     function filterByDate(dates){
-        console.log(dates) ;
+        // console.log(dates) ;
 
-        console.log(dates[0].format('DD-MM-YYYY')) ;
-        console.log(dates[1].format('DD-MM-YYYY')) ;
+        // console.log(dates[0].format('DD-MM-YYYY')) ;
+        // console.log(dates[1].format('DD-MM-YYYY')) ;
         setfromDate(dates[0].format('DD-MM-YYYY')) ;
         settoDate(dates[1].format('DD-MM-YYYY')) ;
+
+        console.log(moment(dates[0]).format('DD-MM-YYYY'));
+
+        var temprooms = [] ;
+        var availability = false ;
+
+        for(const room of duplicate){
+            if(room.currentbookings.length >  0){
+
+                for(const booking of room.currentbookings){
+                    if(
+                        !moment(dates[0].format('DD-MM-YYYY')).isBetween(
+                            booking.fromdate,
+                            booking.todate
+                        )&&
+                        !moment(dates[1].format('DD-MM-YYYY')).isBetween(
+                            booking.fromdate,
+                            booking.todate
+                        )
+                        
+                    ){
+                        if(
+                            dates[0].format('DD-MM-YYYY') !== booking.fromdate &&
+                            dates[0].format('DD-MM-YYYY') !== booking.todate &&
+                            dates[1].format('DD-MM-YYYY') !== booking.fromdate &&
+                            dates[1].format('DD-MM-YYYY') !== booking.todate 
+                        ){
+                             availability = true ;
+                             console.log("yes");
+                        }
+                    }
+
+                }
+
+            }
+            if(availability == true || room.currentbookings.length == 0){
+                temprooms.push(room) ;
+            }
+
+            setrooms(temprooms);
+        }
     }
 
     return (

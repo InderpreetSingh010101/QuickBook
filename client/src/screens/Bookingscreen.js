@@ -21,6 +21,8 @@ function Bookingscreen(){
     const[loading , setLoading] = useState(true) ;
     const [room, setroom] = useState();
     const [error, setError] = useState();
+    const [tAmount, settAmount] = useState();
+
     
     useEffect(() => {
 
@@ -30,6 +32,7 @@ function Bookingscreen(){
                 const data = (await axios.post(`/api/rooms/getroombyid`,{roomId:roomId})).data;
                 
                 setroom(data);
+                settAmount((data[0].rentperday) * totalDays);
                 setLoading(false);
                 console.log(data);
             } catch (error) {
@@ -41,6 +44,28 @@ function Bookingscreen(){
         putData();
 
     }, []);
+
+    async function bookRoom(){
+      
+      const bookingDetails = {
+
+        
+        room ,
+        userid:JSON.parse(localStorage.getItem('currentUser')).id,
+        fd,
+        td,
+        tAmount ,
+        totalDays
+
+      }
+
+      try{
+        const result = await axios.post('/api/bookings/bookroom' , bookingDetails)
+      }catch(error){
+
+      }
+
+    }
     
     return(
         <div>
@@ -60,7 +85,7 @@ function Bookingscreen(){
                     <h1>Booking Details</h1>
                     <hr/>
                     <b>
-                        <p>Name :</p>
+                        <p>Name :{JSON.parse(localStorage.getItem('currentUser')).name}</p>
                         <p>From Date :{fromDate}</p>
                         <p>To Date :{toDate}</p>
                         <p>Max Count : {room[0].maxcount}</p>
@@ -74,14 +99,14 @@ function Bookingscreen(){
                         <hr/>
                         <p>Total Days :{totalDays}</p>
                         <p>Rent Per Day : {room[0].rentperday}/-</p>
-                        <p>Total Amount : {(room[0].rentperday) * (totalDays)}</p>
+                        <p>Total Amount : {tAmount}</p>
 
                     </b>
 
                   </div>
 
                   <div style={{float:'right'}}>
-                   <button className="btn btn-primary m-2">Pay Now</button>
+                   <button className="btn btn-primary m-2" onClick={bookRoom}>Pay Now</button>
                   </div>
                 
                 </div>

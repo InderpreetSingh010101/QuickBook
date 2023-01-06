@@ -58,3 +58,8 @@ h1{
 .mrr{
   margin-right: 2rem !important;
 }
+input , select , .ant-picker{
+  height: 35px !important;
+  box-shadow:none !important;
+  
+}

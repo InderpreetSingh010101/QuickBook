@@ -16,6 +16,9 @@ function Homescreen() {
     const [toDate, settoDate] = useState();
     const [duplicate, setduplicate] = useState([]);
 
+    const[searchKey , setsearchKey] = useState('') ;
+    const[type , settype] = useState('all') ;
+
     useEffect(() => {
 
         async function fetchData() {
@@ -86,13 +89,45 @@ function Homescreen() {
         }
     }
 
+      function filterBySearch(){
+        const temprooms = duplicate.filter( room => room.name.toLowerCase().includes(searchKey.toLowerCase()));
+        setrooms(temprooms) ;
+      }
+
+      function filterByType(e){
+        settype(e) ;
+        if( e != 'all'){
+            const temprooms = duplicate.filter(room => room.type.toLowerCase() == e.toLowerCase())
+            setrooms(temprooms) ;
+        }else{
+            setrooms(duplicate) ;
+        }
+      }
+
+
     return (
        <div className='container'>
 
-        <div className='row mt-5'>
+        <div className='row mt-5 bs'>
+           
             <div className='col-md-3'>
             <RangePicker format='DD-MM-YYYY' onChange={filterByDate} />
             </div>
+
+        
+
+        <div className='col-md-5'>
+            <input type='Text' className='form-control' placeholder='search rooms' 
+            value={searchKey} onChange={(e)=>{setsearchKey(e.target.value)}} onKeyUp={filterBySearch}/>
+        </div>
+
+        <div className='col-md-3'>
+            <select className='form-control' value={type} onChange={(e)=>{filterByType(e.target.value)}}>
+            <option value="all">All</option>
+            <option value="delux">Delux</option>
+            <option value="non-delux">Non Delux</option>
+            </select>
+        </div>
 
         </div>
 

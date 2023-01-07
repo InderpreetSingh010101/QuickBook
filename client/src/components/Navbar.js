@@ -26,7 +26,7 @@ function Navbar() {
                                     {user.name}
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Bookings</a></li>
+                                    <li><a class="dropdown-item" href="/profile">Profile</a></li>
                                     <li><a class="dropdown-item" href="#" onClick={logout}>Logout</a></li>
 
                                 </ul>

@@ -19,8 +19,8 @@ function Bookingscreen(){
     
 
     const[loading , setLoading] = useState(true) ;
-    const [room, setroom] = useState();
     const [error, setError] = useState();
+    const [room, setroom] = useState();
     const [tAmount, settAmount] = useState();
 
     
@@ -61,6 +61,7 @@ function Bookingscreen(){
 
       try{
         const result = await axios.post('/api/bookings/bookroom' , bookingDetails)
+        alert("Booking Sucessfull")
       }catch(error){
 
       }
@@ -106,7 +107,7 @@ function Bookingscreen(){
                   </div>
 
                   <div style={{float:'right'}}>
-                   <button className="btn btn-primary m-2" onClick={bookRoom}>Pay Now</button>
+                   <button className="btn btn-primary m-2" onClick={bookRoom}>Book Now</button>
                   </div>
                 
                 </div>

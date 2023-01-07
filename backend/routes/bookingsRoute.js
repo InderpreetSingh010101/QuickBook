@@ -61,6 +61,31 @@ router.post("/getbookingsbyuserid" , async(req,res)=>{
     }
 });
 
+router.post("/cancelbooking" , async(req,res)=>{
+     const{bookingid , roomid} = req.body ;
+
+     try{
+         const bookingItem = await Booking.findOne({_id:bookingid});
+          bookingItem.status = 'cancelled';
+
+          await bookingItem.save() ;
+          const roomitem = await RoomM.findOne({_id : roomid});
+
+          const books = roomitem.currentbookings ;
+
+          const temp = books.filter(booking=>booking.bookingid.toString() !== bookingid)
+          roomitem.currentbookings = temp ;
+          await roomitem.save() ;
+
+          res.send("your booking cancelled sucessful");
+
+
+     }catch(e){
+        return res.status(400).json({ e });
+     }
+
+});
+
 module.exports = router ;
 
 

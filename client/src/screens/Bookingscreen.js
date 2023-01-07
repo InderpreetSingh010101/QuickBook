@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import Loader from '../components/Loader';
 import Error from '../components/Error';
 import moment from 'moment';
+import Swal from 'sweetalert2';
 
 function Bookingscreen(){
 
@@ -61,7 +62,9 @@ function Bookingscreen(){
 
       try{
         const result = await axios.post('/api/bookings/bookroom' , bookingDetails)
-        alert("Booking Sucessfull")
+        Swal.fire('Congrats' , 'Your Booking Sucessfull','success').then(result=>{
+          window.location.href="/home" ;
+         })
       }catch(error){
 
       }

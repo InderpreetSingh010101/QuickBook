@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Tabs } from 'antd';
 import axios from 'axios';
 import Loader from '../components/Loader';
+import Swal from 'sweetalert2';
 
 function ProfileScreen() {
 
@@ -74,6 +75,21 @@ export function MyBookings(){
 
 
      },[]);
+
+
+     async function cancelBooking(bookingid , roomid){
+
+
+        try{
+           const result = await(await axios.post("/api/bookings/cancelbooking",{bookingid , roomid})).data
+           console.log(result) ;
+           Swal.fire('Congrats' , 'Your Booking Cancelled Sucessfully','success').then(result=>{
+            window.location.reload() ;
+           })
+        }catch(e){
+          console.log(e) ;
+        }
+     }
     
      return(
         <div>
@@ -90,9 +106,11 @@ export function MyBookings(){
                         <p><b>Amount :</b> {booking.totalamount}</p>
                         <p><b>Status :</b> {booking.status == 'booked'?'CONFIRMED' : 'CANCELLED'}</p>
                         
-                        <div className='text-end'>
-                             <button className='btn btn-primary'>CANCEL BOOKING</button>
-                        </div>
+                        {booking.status !== 'cancelled' &&(
+                            <div className='text-end'>
+                            <button className='btn btn-primary' onClick={()=>{cancelBooking(booking._id , booking.roomid)}}>CANCEL BOOKING</button>
+                       </div>
+                        )}
 
                     </div>
                    }))}

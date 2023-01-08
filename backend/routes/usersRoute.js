@@ -38,4 +38,17 @@ router.post("/login" , async(req , res)=>{
     }
 });
 
+router.get("/getallusers" , async(req,res)=>{
+
+    try{
+     const bookings = await User.find() ;
+     res.send(bookings) ;
+ 
+    }catch(e){
+     return res.status(400).json({ e });
+ 
+    }
+ 
+ });
+
 module.exports = router ;

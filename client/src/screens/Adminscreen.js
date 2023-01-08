@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Tabs } from 'antd';
 import axios from 'axios';
 import Loader from '../components/Loader';
+import Swal from 'sweetalert2';
 
 
 function Adminscreen() {
@@ -70,7 +71,7 @@ export function Bookings() {
             try {
                 setLoading(true)
                 const data = await (await axios.get('/api/bookings/getallbookings')).data
-                console.log(data);
+                // console.log(data);
                 setbookings(data);
                 setLoading(false)
             } catch (e) {
@@ -288,6 +289,27 @@ export function UsersT() {
 
 export function AddUserT(){
 
+   async function addRoom(){
+        const newRoom ={
+            name , 
+            rentperday,
+            maxcount,
+            description,
+            phonenumber,
+            type,
+            imageurls:[imageurl1,imageurl2,imageurl3]
+        }
+
+        try{
+          const result = await(await axios.post('/api/rooms/addroom' , newRoom)) .data ;
+          Swal.fire('Congrats', 'Your Room Added !', 'success')
+         }catch(e){
+          console.log(e) ;
+        }
+
+        console.log(newRoom) ;
+    }
+
     const[name ,setname] = useState('');
  const[rentperday ,setrentperday] = useState();
  const[maxcount ,setmaxcount] = useState();
@@ -304,21 +326,28 @@ export function AddUserT(){
         <div className='row'>
 
             <div className='col-md-5'>
-              <input type ="text" className='form-control ' placeholder='room name'
+              <input type ="text" className='form-control mt-2 ' placeholder='room name'
               value = {name} onChange={(e)=>{setname(e.target.value)}} />
               <input type ="text" className='form-control mt-2' placeholder='rent per day' 
-              value = {name} onChange={(e)=>{setname(e.target.value)}}/>
-              <input type ="text" className='form-control mt-2' placeholder='max count' />
-              <input type ="text" className='form-control mt-2' placeholder='description' />
-              <input type ="text" className='form-control mt-2' placeholder='phone number' />
+              value = {rentperday} onChange={(e)=>{setrentperday(e.target.value)}}/>
+              <input type ="text" className='form-control mt-2' placeholder='max count'
+              value = {maxcount} onChange={(e)=>{setmaxcount(e.target.value)}} />
+              <input type ="text" className='form-control mt-2' placeholder='description'
+              value = {description} onChange={(e)=>{setdescription(e.target.value)}} />
+              <input type ="text" className='form-control mt-2' placeholder='phone number'
+              value = {phonenumber} onChange={(e)=>{setphonenumber(e.target.value)}} />
             </div>
             <div className='col-md-5'>
-            <input type ="text" className='form-control ' placeholder='type' />
-              <input type ="text" className='form-control mt-2' placeholder='image  URL 1' />
-              <input type ="text" className='form-control mt-2' placeholder='image  URL 2' />
-              <input type ="text" className='form-control mt-2' placeholder='image  URL 3' />
+            <input type ="text" className='form-control mt-2' placeholder='type'
+            value = {type} onChange={(e)=>{settype(e.target.value)}} />
+              <input type ="text" className='form-control mt-2' placeholder='image  URL 1'
+              value = {imageurl1} onChange={(e)=>{setimageurl1(e.target.value)}} />
+              <input type ="text" className='form-control mt-2' placeholder='image  URL 2' 
+              value = {imageurl2} onChange={(e)=>{setimageurl2(e.target.value)}}/>
+              <input type ="text" className='form-control mt-2' placeholder='image  URL 3'
+              value = {imageurl3} onChange={(e)=>{setimageurl3(e.target.value)}} />
                <div className='text-end mt-2'> 
-                    <button className='btn btn-primary'>Add Room</button>
+                    <button className='btn btn-primary' onClick={addRoom}>Add Room</button>
                </div>
             </div>
 

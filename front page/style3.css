@@ -1,0 +1,29 @@
+.navbar-nav{
+   width:80%;
+    float:right;
+   
+    top:50%;
+    background-color: bisque;
+    word-spacing:1px;
+ 
+}
+.dropdown-menu{
+    
+    color: #e11818;
+}
+
+
+.nav li{
+    margin-left: 40px;
+}
+
+
+
+
+        .btn1{
+            color: red;
+            background-color: rgba(255, 140, 0, 0.941);
+            position: relative;
+            transform: translate(530%,-350%);
+            padding: 10px 24px;
+        }

@@ -3,6 +3,7 @@ import axios from 'axios' ;
 import Loader from "../components/Loader";
 import Error from "../components/Error";
 import Sucess from '../components/Sucess';
+import { Footer } from "./Footer";
 function RegisterScreen() {
 
     const [name, setname] = useState('');
@@ -64,6 +65,10 @@ function RegisterScreen() {
 
             </div>
 
+        </div>
+        <div className='ft'>
+
+        <Footer/>
         </div>
         </>
     )

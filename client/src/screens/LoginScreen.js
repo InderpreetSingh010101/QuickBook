@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios' ;
 import Loader from '../components/Loader';
 import Error from '../components/Error';
+import { Footer } from './Footer';
 function LoginScreen() {
 
     
@@ -54,6 +55,12 @@ function LoginScreen() {
             </div>
 
         </div>
+        <div className='ftl'>
+
+        <Footer/>
+        </div>
+
+
     </>
     )
 }

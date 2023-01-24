@@ -9,6 +9,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: 'Montserrat', sans-serif !important;
+  
 }
 
 code {
@@ -70,3 +71,37 @@ input , select , .ant-picker{
 .fp{
   font-size: 18px !important;
 }
+
+/* .bcg{
+  background-color: #ffffff;
+
+
+}
+.bcw{
+  background-color: #ffffff;
+
+} */
+
+.landing{
+  background-color: black;
+  height: 100vh;
+}
+.bx{
+  border: 2px solid black;
+  height:70vh !important;
+}
+.imgg{
+  display: inline;
+ height: 50% !important;
+}
+
+.ft{
+  margin-top: 19%;
+}
+.ftl{
+  margin-top: 23%;
+}
+
+
+
+

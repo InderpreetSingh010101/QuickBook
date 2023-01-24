@@ -5,6 +5,7 @@ import Loader from '../components/Loader';
 import Error from '../components/Error';
 import { DatePicker, Space } from 'antd';
 import moment from 'moment' ;
+import { Footer } from './Footer';
 
 
 const { RangePicker } = DatePicker;
@@ -108,11 +109,12 @@ function Homescreen() {
 
 
     return (
-       <div className='container'>
+        <>
+       <div className='container ' >
 
-        <div className='row mt-5 bs'>
+        <div className='row mt-5 bs bcw'>
            
-            <div className='col-md-3'>
+            <div className='col-md-3 '>
             <RangePicker format='DD-MM-YYYY' onChange={filterByDate} />
             </div>
 
@@ -136,13 +138,19 @@ function Homescreen() {
          <div className="row justify-content-center mt-5">
 
             {loading ? (<Loader/>) : error ? (<Error/>) : (rooms.map(room => {
-                return <div className="col-md-9 mt-2">
+                return <div className="col-md-9 mt-2 bcw">
                     <Room room={room} fromDate={fromDate} toDate={toDate}/>
                 </div>
             }))}
 
          </div>
+     
+         
        </div> 
+         { (!loading) &&< Footer/>}    
+       </>
     )
 }
+
+
 export default Homescreen;

@@ -37,7 +37,7 @@ function Adminscreen() {
                         </div>,
                     },
                     {
-                        label: `All Room`,
+                        label: `Add Room`,
                         key: '3',
                         children: <div>
                             <AddUserT/>
@@ -294,7 +294,7 @@ export function AddUserT(){
             name , 
             rentperday,
             maxcount,
-            description,
+            descriptions,
             phonenumber,
             type,
             imageurls:[imageurl1,imageurl2,imageurl3]
@@ -313,7 +313,7 @@ export function AddUserT(){
     const[name ,setname] = useState('');
  const[rentperday ,setrentperday] = useState();
  const[maxcount ,setmaxcount] = useState();
- const[description ,setdescription] = useState();
+ const[descriptions ,setdescription] = useState();
  const[phonenumber ,setphonenumber] = useState();
 
  const[type ,settype] = useState();
@@ -333,7 +333,7 @@ export function AddUserT(){
               <input type ="text" className='form-control mt-2' placeholder='max count'
               value = {maxcount} onChange={(e)=>{setmaxcount(e.target.value)}} />
               <input type ="text" className='form-control mt-2' placeholder='description'
-              value = {description} onChange={(e)=>{setdescription(e.target.value)}} />
+              value = {descriptions} onChange={(e)=>{setdescription(e.target.value)}} />
               <input type ="text" className='form-control mt-2' placeholder='phone number'
               value = {phonenumber} onChange={(e)=>{setphonenumber(e.target.value)}} />
             </div>

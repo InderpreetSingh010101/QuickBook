@@ -9,9 +9,11 @@ import RegisterScreen from './screens/RegisterScreen';
 import LoginScreen from './screens/LoginScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import Adminscreen from './screens/Adminscreen';
+import Landingscreen from './screens/Landingscreen';
+import { Footer } from './screens/Footer';
 function App() {
   return (
-    <div className="App">
+    <div className="App bcg">
       <Navbar/>
      <BrowserRouter>
      <Routes>
@@ -21,9 +23,12 @@ function App() {
          <Route path="/login" exact element={<LoginScreen/>}/>
          <Route path="/profile"  exact element={<ProfileScreen/>}/>
          <Route path='/admin' exact element={<Adminscreen/>}/>
+         <Route path='/' exact element={<Landingscreen/>}/>
+         
 
      </Routes>
      </BrowserRouter>
+     
     </div>
   );
 }

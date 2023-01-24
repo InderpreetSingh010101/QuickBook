@@ -6,6 +6,7 @@ import Loader from '../components/Loader';
 import Error from '../components/Error';
 import moment from 'moment';
 import Swal from 'sweetalert2';
+import { Footer } from './Footer';
 
 function Bookingscreen(){
 
@@ -72,6 +73,7 @@ function Bookingscreen(){
     }
     
     return(
+      <>
         <div>
            {loading ? (<Loader/>):error ? (<Error/>) :(
             <div className='m-5' >
@@ -121,7 +123,11 @@ function Bookingscreen(){
             </div>
            )}
         </div>
+        <Footer/>
+        </>
+
     );
+
 }
 
 export default Bookingscreen;

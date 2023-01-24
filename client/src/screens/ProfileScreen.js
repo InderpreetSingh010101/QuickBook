@@ -3,6 +3,7 @@ import { Tabs } from 'antd';
 import axios from 'axios';
 import Loader from '../components/Loader';
 import Swal from 'sweetalert2';
+import { Footer } from './Footer';
 
 function ProfileScreen() {
 
@@ -19,6 +20,7 @@ function ProfileScreen() {
 
 
     return (
+        <>
         <div className='profile ml-3 m-3'>
             <Tabs
                 defaultActiveKey="1"
@@ -49,7 +51,13 @@ function ProfileScreen() {
                     }
                 ]}
             />
-        </div>)
+        </div>
+        <div className='ft'>
+        <Footer/>
+        </div>
+
+        </>
+        )
 }
 
 export default ProfileScreen;
@@ -98,6 +106,7 @@ export function MyBookings() {
     }
 
     return (
+        <>
         <div>
             <div className='row'>
                 <div className='col-md-6'>
@@ -124,5 +133,7 @@ export function MyBookings() {
 
             </div>
         </div>
+        
+        </>
     )
 }
